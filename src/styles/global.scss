@@ -1,0 +1,100 @@
+@import './variables.scss';
+
+/* -- button -- */
+button {
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  width: 10vw;
+  min-width: 80px;
+  vertical-align: middle;
+  img {
+    pointer-events: none;
+    padding: 0;
+  }
+  user-select: none;
+  padding: .6rem 1rem;
+  margin: 5px 10px;
+  font-size: 1rem;;
+  cursor: pointer;
+  border-radius: .2rem;
+  transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out,box-shadow .2s ease-in-out;
+  background-color: #007bff;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.btn-red {
+  border-color: $red-color;
+  background-color: $red-color;
+}
+
+.btn-orange {
+  border-color: $orange-color;
+  background-color: $orange-color;
+}
+
+.btn-green {
+  border-color: $green-color;
+  background-color: $green-color;
+}
+
+.btn-blue {
+  border-color: $blue-color;
+  background-color: $blue-color;
+}
+
+.btn-grey {
+  border-color: $grey-color;
+  background-color: $grey-color;
+  &:hover {
+    background-color: $grey-color;
+  }
+}
+
+.btn-blue-outline {
+  color: $blue-color;
+  border-color: $blue-color;
+  &:hover {
+    background-color: $blue-color;
+    color: $white-color;
+  }
+}
+
+.btn-red-outline {
+  color: $red-color;
+  border-color: $red-color;
+  &:hover {
+    background-color: $red-color;
+    color: $white-color;
+  }
+}
+
+.btn-green-outline {
+  color: $green-color;
+  border-color: $green-color;
+  &:hover {
+    background-color: $green-color;
+    color: $white-color;
+  }
+}
+
+.btn-grey-outline {
+  color: $grey-color;
+  border-color: $grey-color;
+  &:hover {
+    background-color: $grey-color;
+    color: $white-color;
+  }
+}
+
+button[class^="btn"] {
+  &:not(button[class$="outline"]):hover {
+    filter: brightness(80%);
+  }
+}
+
+button[class*="-outline"] {
+    background-color: transparent;
+}

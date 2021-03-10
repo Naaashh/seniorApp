@@ -1,0 +1,141 @@
+@import './variables.scss';
+@import './global.scss';
+
+html {
+  height: 100%;
+  font-family: "Roboto Thin", monospace;
+  font-size: 1.9em;
+  letter-spacing: 1px;
+  color: whitesmoke;
+}
+
+body, .container-after-titlebar {
+  margin: 50px;
+  background-color: $background-color;
+
+  // titlebar
+  .titlebar {
+    background-color: transparent !important;
+    .menubar, .window-title {
+      opacity: 0;
+      height: 1px;
+    }
+  }
+}
+
+#container {
+  height: 100%;
+  display: block;
+}
+
+/* -- application -- */
+#application-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($application-size, 1fr));
+  gap: 100px;
+}
+
+/* -- application -- */
+.application {
+  background-color: $application-color;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0 2px #000518;
+  text-align: center;
+  cursor: pointer;
+
+  width: $application-size;
+  height: $application-size;
+  user-select: none;
+
+  .application_content {
+    img {
+      height: calc(#{$application-size} / 1.6);
+      width: calc(#{$application-size} / 1.6);
+      display: block;
+      margin: 20px auto;
+    }
+    .text {
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+    filter: brightness(90%);
+  }
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+app-footer {
+  position: fixed;
+  bottom: 25px;
+  width: 800px;
+  right: 50px;
+
+  app-parameters {
+    cursor: pointer;
+    float:right;
+    margin-right: 120px;
+
+    .parameters {
+      height: 100px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      border-radius: 20px;
+      margin: 0;
+    }
+
+    .parametersDisplay {
+      display:flex;
+      animation: parametersDisplay 0.5s ease-in-out;
+    }
+
+    .parametersDisplayOut {
+      animation: parametersDisplayOut 0.5s ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  .parametersClick {
+    transition: all 0.7s ease-in-out;
+    transform: rotate(90deg) scale(1.8, 1.8);
+  }
+
+  .parameters {
+    button {
+      height: 85px;
+      img {
+        height: 35px;
+        width: 35px;
+      }
+    }
+    .edit-btn img{
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  #parameters-icon {
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 80px;
+    z-index: 100;
+    transition: all 0.5s ease-in-out;
+    height: $parameter-img-size;
+    width: $parameter-img-size;
+  }
+}
+
+@keyframes parametersDisplay {
+  0%   {transform: translateX(100px);opacity:0;}
+  100% {transform: translateX(0px);opacity:1;}
+}
+
+@keyframes parametersDisplayOut {
+  0%   {transform: translateX(0);opacity:1}
+  100% {transform: translateX(100px);opacity:0;display:none;}
+}
