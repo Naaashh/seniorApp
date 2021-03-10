@@ -6,13 +6,15 @@ import {ApplicationListComponent} from './application-list/application-list.comp
 import {ApplicationComponent} from './application/application.component';
 import {ParametersComponent} from './commun/parameters/parameters.component';
 import {NgxElectronModule} from 'ngx-electron';
+import {FooterComponent} from './commun/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ApplicationListComponent,
     ApplicationComponent,
-    ParametersComponent
+    ParametersComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
