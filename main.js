@@ -1,5 +1,6 @@
 const electron = require('electron')
 const {app, BrowserWindow, Menu, Tray, ipcMain} = electron
+const fs = require('fs')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

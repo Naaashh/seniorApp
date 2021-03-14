@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Application} from '../application/application.model';
-import {applications} from '../commun/global.constants';
 import {environment} from '../../environments/environment';
+import {StorageService} from '../commun/service/storage/storage.service';
+import {applications} from '../commun/global.constants';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-application-list',
@@ -10,9 +12,14 @@ import {environment} from '../../environments/environment';
 })
 export class ApplicationListComponent implements OnInit {
 
-  applications: Array<Application> = applications;
+  applications: Observable<Array<Application>>;
+
+  constructor(private storageService: StorageService) {
+  }
 
   ngOnInit(): void {
-    this.applications = this.applications.map(application => ({...application, image: `${environment.imagesFolder}/${application.image}`}));
+   // this.applications = this.storageService.currentApplications$.pipe(map(application => application.map(app => ({...app, image: `${environment.imagesFolder}/${app.image}`}))));
+
+    this.applications = of(applications.map(application => ({...application, image: `${environment.imagesFolder}/${application.image}`})));
   }
 }

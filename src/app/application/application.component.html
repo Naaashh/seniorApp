@@ -1,4 +1,12 @@
-<div class="application_content" (click)="openApp()">
+<div class="application-content" (click)="openApp()">
+  <div class="application-modification-all"  *ngIf="(editService.edit | async) || (parameterService.parameters | async)">
+    <div class="application-modification" (click)="edit($event, application)">
+      <img src="assets/images/draw.svg" alt="edit">
+    </div>
+    <div class="application-suppression" (click)="remove($event, application.name)" >
+      X
+    </div>
+  </div>
   <img [src]="application.image" [alt]="application.name">
   <p class="text">{{application.name}}</p>
 </div>

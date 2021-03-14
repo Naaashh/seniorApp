@@ -1,8 +1,14 @@
 <div class="parameters" [class.parametersDisplay]="paramClick" [class.parametersDisplayOut]="!paramClick">
-  <button class="btn btn-orange edit-btn">
+  <button class="btn btn-green" (click)="add()">
+    <img src="assets/images/add.svg" alt="add">
+  </button>
+  <button class="btn btn-orange edit-btn" (click)="setEditMode()">
     <img src="assets/images/edit.svg" alt="edit">
   </button>
   <button class="btn btn-blue">
     <img src="assets/images/magnifying-glass.svg" alt="magnifying-glass">
+  </button>
+  <button class="btn btn-grey" (click)="reset()">
+    <img src="assets/images/refreshing.svg" alt="reset">
   </button>
 </div>
