@@ -7,7 +7,7 @@ button {
   text-align: center;
   white-space: nowrap;
   width: 10vw;
-  min-width: 80px;
+  min-width: 120px;
   vertical-align: middle;
   img {
     pointer-events: none;
@@ -23,6 +23,9 @@ button {
   background-color: #007bff;
   border-width: 2px;
   border-style: solid;
+  &:disabled {
+    filter: grayscale(80%);
+  }
 }
 
 .btn-red {
@@ -96,5 +99,27 @@ button[class^="btn"] {
 }
 
 button[class*="-outline"] {
-    background-color: transparent;
+  background-color: transparent;
+}
+
+
+/* -- input -- */
+
+input {
+  border: none;
+  padding: 15px 20px;
+  border-radius: .2rem;
+  text-align: right;
+  min-width: 200px;
+  width: 25vw;
+  height: 25px;
+  background: $application-color;
+}
+
+input.ng-invalid.ng-touched {
+  border-right: 8px solid $red-color-light;
+}
+
+input.ng-valid.ng-touched {
+  border-right: 8px solid $green-color;
 }

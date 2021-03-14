@@ -1,0 +1,40 @@
+@import './variables.scss';
+@import './global.scss';
+
+@media only screen and (max-width: 768px)  {
+  * {
+    font-size: 20px;
+  }
+  app-add-edit-modal {
+    .modal {
+
+      grid-template-columns: 100%;
+      gap: 0;
+      grid-template: "title" 10%
+                     "form" 80%
+                     "validate" 10%;
+      input {
+        width: 100%;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      .img-preview {
+        display: none;
+      }
+
+      .form {
+        .div-form {
+          flex-wrap: wrap;
+          margin-bottom: 80px;
+        }
+      }
+
+      .validate {
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
