@@ -136,3 +136,27 @@ ipcMain.on('execute-command', (event, args) => {
     console.log(output);
   });
 });
+
+/**
+ * read data from actual_list.json file
+ */
+ipcMain.on('get-data', event => {
+  event.reply('get-data', JSON.parse(fs.readFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, 'utf-8')));
+});
+
+/**
+ * modify data from actual_list.json file
+ */
+ipcMain.on('modify-data', (event, data) => {
+  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, JSON.stringify(data));
+});
+
+/**
+ * reset data from default_list.json file
+ */
+ipcMain.on('reset-data', (event, data) => {
+  const default_data = fs.readFileSync(`${__dirname}\\dist\\assets\\data\\default_list.json`, 'utf-8');
+  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, default_data);
+
+  event.reply('reset-data', JSON.parse(default_data));
+});
