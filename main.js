@@ -12,7 +12,7 @@ let tray;
 const useSplashScreen = !app.commandLine.hasSwitch('disable-splashScreen');
 
 // if command doesn't ask for prod mod, switched to devMode
-const isDevMode = !app.commandLine.hasSwitch('prod');
+const isDevMode = app.commandLine.hasSwitch('dev');
 
 const iconPath = 'dist/assets/icon/favicon.ico'
 

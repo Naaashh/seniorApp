@@ -2,7 +2,7 @@
 // It has the same sandbox as a Chrome extension.
 
 
-const customTitlebar = require('custom-electron-titlebar');
+const customTitlebar = require('./assets/static/custom-electron-titlebar');
 
 window.addEventListener('DOMContentLoaded', () => {
   new customTitlebar.Titlebar({
