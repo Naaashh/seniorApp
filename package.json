@@ -1,6 +1,8 @@
 {
   "name": "senior-app",
-  "version": "0.0.0",
+  "author": "an-author",
+  "description": "a nice description",
+  "version": "1.0.0",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -25,6 +27,7 @@
     "ngx-electron": "^2.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

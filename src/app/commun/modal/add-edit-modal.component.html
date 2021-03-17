@@ -1,0 +1,68 @@
+<div class="bg-modal">
+  <div class="modal">
+
+    <div class="title">
+      {{application.id ? 'Modifier le raccourci': 'Ajouter un raccourci'}}
+      <div class="remove" (click)="closeModal()">X</div>
+    </div>
+
+    <div class="img-preview">
+      <!-- if image has been updated, reads image and doesn't look for image folder -->
+      <img [src]="imagePreviewed.image" [alt]="imagePreviewed.name">
+    </div>
+    <div class="form">
+      <form [formGroup]="form" (keydown.enter)="submit()">
+
+          <div class="div-form">
+            <label for="name-input">Nom</label>
+
+            <div class="error">
+              <span *ngIf="form.get('name').touched && form.get('name').errors?.required">un nom est nécéssaire.</span>
+            </div>
+
+            <input type="text"
+                   id="name-input"
+                   formControlName="name"
+                   aria-describedby="nom_application"
+                   placeholder="nom"
+                   autofocus>
+          </div>
+
+          <div class="div-form">
+            <label for="lien-input">Lien</label>
+
+            <div class="error">
+              <span *ngIf="form.get('execute').touched && form.get('execute').errors?.required">un lien est nécéssaire.</span>
+              <span *ngIf="form.get('execute').touched && form.get('execute').errors?.pattern">un lien correct est nécéssaire.</span>
+            </div>
+
+            <input type="text"
+                   id="lien-input"
+                   formControlName="execute"
+                   aria-describedby="lien_application"
+                   placeholder="Lien du raccourci">
+          </div>
+
+          <div class="div-form">
+            <label for="image-input">Image</label>
+
+            <input hidden type="file"
+                   id="image-input-upload"
+                   accept="image/png, image/jpeg" (change)="fileUploaded($event)">
+
+            <input type="text"
+                   id="image-input"
+                   formControlName="image"
+                   aria-describedby="image_application"
+                   placeholder="image" (click)="uploadFile()" readonly>
+          </div>
+
+      </form>
+  </div>
+    <div class="validate">
+      <button class="btn btn-green-outline" type="submit" (click)="submit()" [disabled]="this.form.invalid">
+        OK
+      </button>
+    </div>
+  </div>
+</div>

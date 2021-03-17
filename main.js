@@ -1,5 +1,5 @@
 const electron = require('electron')
-const {app, BrowserWindow, Menu, Tray, ipcMain} = electron
+const {app, BrowserWindow, Menu, Tray, ipcMain, dialog, remote} = electron;
 const fs = require('fs')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -155,9 +155,14 @@ ipcMain.on('modify-data', (event, data) => {
 /**
  * reset data from default_list.json file
  */
-ipcMain.on('reset-data', (event, data) => {
+ipcMain.on('reset-data', event => {
   const default_data = fs.readFileSync(`${__dirname}\\dist\\assets\\data\\default_list.json`, 'utf-8');
   fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, default_data);
 
   event.reply('reset-data', JSON.parse(default_data));
+});
+
+ipcMain.on('add-image', (event, data) => {
+  const buffered = Buffer.from(data.image.split(';base64,').pop(), 'base64');
+  fs.writeFileSync(`${__dirname}\\dist\\assets\\images\\${data.name}`, buffered);
 });

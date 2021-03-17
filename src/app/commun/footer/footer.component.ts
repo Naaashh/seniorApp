@@ -1,5 +1,6 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
 import {ParameterService} from '../service/parameters/parameter.service';
+import {ModalService} from '../service/modal/modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +10,7 @@ import {ParameterService} from '../service/parameters/parameter.service';
 export class FooterComponent {
 
   constructor(private eRef: ElementRef,
+              private modal: ModalService,
               public parameterService: ParameterService) {
   }
 
@@ -18,7 +20,7 @@ export class FooterComponent {
    */
   @HostListener('document:click', ['$event'])
   clickOutsideApp(event): void {
-    if (!this.eRef.nativeElement.contains(event.target) && this.parameterService.parameterShow) {
+    if (!this.eRef.nativeElement.contains(event.target) && !this.modal.show && this.parameterService.parameterShow) {
       this.parameterService.changeParamMode();
     }
   }

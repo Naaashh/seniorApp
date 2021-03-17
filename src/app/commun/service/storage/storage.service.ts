@@ -14,6 +14,9 @@ export class StorageService {
 
   constructor(private electronService: ElectronService) { }
 
+  /**
+   * get stored data
+   */
   async getData(): Promise<Array<Application>> {
     this.electronService.ipcRenderer.send('get-data');
     return await new Promise(resolve => this.electronService.ipcRenderer.on('get-data', (event, message) => {
@@ -23,20 +26,43 @@ export class StorageService {
     }));
   }
 
+  /**
+   * Add an application to stored data
+   * @param application application to add
+   */
   add(application: Application): void {
     this.currentApplications = [...this.currentApplications, application];
     this.modifyAndUpdateState();
   }
 
+  /**
+   * Add an image to images folder
+   * @param image image data with name
+   */
+  addImage(image: {image: string, name: string}): void {
+    this.electronService.ipcRenderer.send('add-image', image);
+  }
+
+  /**
+   * edit an application to stored data
+   * @param application application to edit
+   */
   edit(application: Application): void {
-    this.currentApplications[this.currentApplications.findIndex(app => app.name === application.name)] = application;
+    this.currentApplications[this.currentApplications.findIndex(app => app.id === application.id)] = application;
     this.modifyAndUpdateState();
   }
 
-  remove(name: string): void {
-    this.currentApplications.splice(this.currentApplications.findIndex(application => application.name === name), 1);
-    console.log(this.currentApplications);
-    this.modifyAndUpdateState();
+  /**
+   * remove an application in stored data if exists
+   * @param id application id to remove
+   */
+  remove(id: string): void {
+    const indexOfAppToRemove: number = this.currentApplications.findIndex(application => application.id === id);
+
+    if ( indexOfAppToRemove !== -1) {
+      this.currentApplications.splice(indexOfAppToRemove, 1);
+      this.modifyAndUpdateState();
+    }
   }
 
   /**

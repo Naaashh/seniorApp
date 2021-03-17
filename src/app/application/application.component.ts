@@ -1,9 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Application} from './application.model';
 import {ElectronService} from 'ngx-electron';
-import {EditService} from '../commun/service/edit/edit.service';
 import {ParameterService} from '../commun/service/parameters/parameter.service';
 import {StorageService} from '../commun/service/storage/storage.service';
+import {ModalService} from '../commun/service/modal/modal.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-application',
@@ -12,13 +13,14 @@ import {StorageService} from '../commun/service/storage/storage.service';
 })
 export class ApplicationComponent {
 
-  constructor(public editService: EditService,
-              public parameterService: ParameterService,
+  constructor(public parameterService: ParameterService,
               private electron: ElectronService,
+              private modal: ModalService,
               public storageService: StorageService) {
   }
 
   @Input() application: Application;
+  imagesFolder = environment.imagesFolder;
 
   /**
    * open app on host computer
@@ -33,13 +35,25 @@ export class ApplicationComponent {
     }
   }
 
-  remove(event: Event, name: string): void {
+  /**
+   * Remove application from list
+   * @param event current application
+   * @param id application id
+   */
+  remove(event: Event, id: string): void {
+    // stop propagation to not open app
     event.stopPropagation();
-    this.storageService.remove(name);
+    this.storageService.remove(id);
   }
 
+  /**
+   * edit requested application
+   * @param event current application
+   * @param application chosen application
+   */
   edit(event: Event, application: Application): void {
+    // stop propagation to not open app
     event.stopPropagation();
-    this.storageService.edit(application);
+    this.modal.openModal(application);
   }
 }
