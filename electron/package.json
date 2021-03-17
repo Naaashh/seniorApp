@@ -1,0 +1,17 @@
+{
+  "name": "senior-app",
+  "author": "an-author",
+  "description": "a nice description",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start:electron": "electron . --disable-splash",
+    "build&start:electron": "ng build --prod --base-href ./ && electron .",
+    "electron:package": "electron-packager . --platform=win32 --overwrite --asar --prune=true --icon=dist/assets/icon/favicon.ico --extra-resource=dist/assets/data"
+  },
+  "private": true,
+  "devDependencies": {
+    "electron": "^11.2.3",
+    "electron-packager": "^15.2.0"
+  }
+}
