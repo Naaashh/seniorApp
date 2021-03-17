@@ -113,13 +113,14 @@ input {
   min-width: 200px;
   width: 25vw;
   height: 25px;
+  outline: none;
   background: $application-color;
 }
 
-input.ng-invalid.ng-touched {
+input.ng-invalid {
   border-right: 8px solid $red-color-light;
 }
 
-input.ng-valid.ng-touched {
+input.ng-valid {
   border-right: 8px solid $green-color;
 }
