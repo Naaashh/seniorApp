@@ -1,6 +1,6 @@
-const electron = require('electron')
+const electron = require('electron');
 const {app, BrowserWindow, Menu, Tray, ipcMain} = electron;
-const fs = require('fs')
+const fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,12 +9,16 @@ let mainWindow;
 let splash;
 let tray;
 
+let actualData;
+let currentDir = __dirname + '\\';
+let assetsDir = __dirname + '\\dist/assets\\';
+
 const useSplashScreen = !app.commandLine.hasSwitch('disable-splashScreen');
 
 // if command doesn't ask for prod mod, switched to devMode
 const isDevMode = app.commandLine.hasSwitch('dev');
 
-const iconPath = 'dist/assets/icon/favicon.ico'
+const iconPath = `${assetsDir}icon\\favicon.ico`;
 
 /**
  * init electron app
@@ -48,13 +52,13 @@ function createWindow() {
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      preload: './preload.js',
+      preload: `${currentDir}preload.js`,
       enableRemoteModule: true
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('dist/index.html');
+  mainWindow.loadFile(`${currentDir}dist\\index.html`);
 
   if (isDevMode) {
     // Open the DevTools.
@@ -67,7 +71,7 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
-  })
+  });
 }
 
 // This method will be called when Electron has finished
@@ -90,18 +94,17 @@ app.on('window-all-closed', () => {
 function createSplash() {
   // create splash screen
   splash = new BrowserWindow({width: 600, height: 800, transparent: true, frame: false, alwaysOnTop: true});
-  splash.loadFile('dist/assets/static/splash.html');
+  splash.loadFile(`${assetsDir}static\\splash.html`);
 }
 
 function createTray() {
   tray = new Tray(iconPath);
   const contextMenu = Menu.buildFromTemplate([
-
-    { label: 'open', click:  _ => mainWindow.show() },
-    { label: 'exit', role: 'quit' },
-  ])
-  tray.setToolTip('seniorApp')
-  tray.setContextMenu(contextMenu)
+    { label: 'ouvrir', click:  _ => mainWindow.show() },
+    { label: 'quitter', role: 'quit' },
+  ]);
+  tray.setToolTip('seniorApp');
+  tray.setContextMenu(contextMenu);
 
   tray.on('double-click', _ => mainWindow.show());
 }
@@ -139,29 +142,34 @@ ipcMain.on('execute-command', (event, args) => {
 });
 
 /**
- * read data from actual_list.json file
+ * read data from actual_data.json file
  */
 ipcMain.on('get-data', event => {
-  event.reply('get-data', JSON.parse(fs.readFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, 'utf-8')));
+  actualData = JSON.parse(fs.readFileSync(`${assetsDir}data\\actual_data.json`, 'utf-8'));
+  event.reply('get-data', actualData);
 });
 
 /**
- * modify data from actual_list.json file
+ * modify applications from actual_data.json file
  */
 ipcMain.on('modify-data', (event, data) => {
-  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, JSON.stringify(data));
+  actualData = {...actualData, ...data};
+  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_data.json`, JSON.stringify(actualData));
 });
 
 /**
- * reset data from default_list.json file
+ * reset data from default_data.json file
  */
 ipcMain.on('reset-data', event => {
-  const default_data = fs.readFileSync(`${__dirname}\\dist\\assets\\data\\default_list.json`, 'utf-8');
-  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_list.json`, default_data);
+  actualData = JSON.parse(fs.readFileSync(`${__dirname}\\dist\\assets\\data\\default_data.json`, 'utf-8'));
+  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_data.json`, JSON.stringify(actualData));
 
-  event.reply('reset-data', JSON.parse(default_data));
+  event.reply('reset-data', actualData);
 });
 
+/**
+ * add image to images folder
+ */
 ipcMain.on('add-image', (event, data) => {
   const buffered = Buffer.from(data.image.split(';base64,').pop(), 'base64');
   fs.writeFileSync(`${__dirname}\\dist\\assets\\images\\${data.name}`, buffered);
