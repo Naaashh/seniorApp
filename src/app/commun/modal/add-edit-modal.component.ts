@@ -17,12 +17,11 @@ export class AddEditModalComponent implements OnInit {
   imagePreviewed: { image: string, name: string };
   reader: FileReader;
   imagesFolder = environment.imagesFolder;
+  application: Application;
 
   constructor(private fb: FormBuilder,
               public modal: ModalService,
               private storageService: StorageService) { }
-
-  application: Application;
 
   ngOnInit(): void {
     this.modal.value$.subscribe({
@@ -36,7 +35,7 @@ export class AddEditModalComponent implements OnInit {
         this.form = this.fb.group({
           name: this.fb.control(this.application.name, Validators.required),
           image: this.fb.control(this.application.image?.split('/').pop()),
-          execute: this.fb.control(this.application.execute, [Validators.required, Validators.pattern('^ ?(?:https?:\\/\\/)?([\\w]+.)+[a-z]+ ?$')])
+          execute: this.fb.control(this.application.execute, [Validators.required, Validators.pattern('^ ?(?:https?:\\/\\/)?([\\w]+.)+.[a-z]+ ?$')])
         });
       }
     });

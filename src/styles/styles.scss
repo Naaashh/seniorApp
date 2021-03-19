@@ -297,6 +297,30 @@ app-add-edit-modal {
   }
 }
 
+/* -- slider -- */
+#slider-div {
+
+  input.slider {
+    border-radius: 50px;
+  }
+
+  position: fixed;
+  width: 500px;
+  height: 80px;
+  bottom: 130px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background: #101116;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    padding: 5px;
+    font-size: 25px;
+  }
+}
+
 /* -- parameters keyframes -- */
 @keyframes parameters-show {
   0%   {transform: translateX(100px);opacity:0;}

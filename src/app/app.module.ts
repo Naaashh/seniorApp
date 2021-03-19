@@ -17,7 +17,6 @@ import {ReactiveFormsModule} from '@angular/forms';
         ApplicationComponent,
         ParametersComponent,
         FooterComponent,
-        AddEditModalComponent,
         AddEditModalComponent
     ],
   imports: [

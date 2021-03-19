@@ -1,6 +1,6 @@
 <app-add-edit-modal *ngIf="modal.show$ | async"></app-add-edit-modal>
 <div id="application-list">
-  <div class="application" *ngFor="let application of applications | async">
+  <div class="application" *ngFor="let application of (state | async).applications">
     <app-application [application]="application"></app-application>
   </div>
 </div>

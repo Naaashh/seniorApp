@@ -105,7 +105,7 @@ button[class*="-outline"] {
 
 /* -- input -- */
 
-input {
+input[type="text"] {
   border: none;
   padding: 15px 20px;
   border-radius: .2rem;
@@ -123,4 +123,40 @@ input.ng-invalid {
 
 input.ng-valid {
   border-right: 8px solid $green-color;
+}
+
+input[type=range] {
+  width: 80%;
+  height: 10px;
+  outline: none;
+  cursor: pointer;
+  background-color: $white-color;
+  -webkit-appearance: none;
+
+  &::-webkit-slider-thumb {
+    width: 33px;
+    height: 33px;
+    background: #1286f4;
+    bottom:0;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-slider-runnable-track,
+  &::-moz-range-track {
+    background: #ffffff;
+    border: 0;
+    border-radius: 25px;
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+  }
+
+  &:focus::-webkit-slider-runnable-track,
+  &:focus::-ms-fill-lower,
+  &:focus::-ms-fill-upper {
+    background: #ffffff;
+  }
 }

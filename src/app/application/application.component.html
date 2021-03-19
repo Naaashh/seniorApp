@@ -5,10 +5,10 @@
       <img src="assets/images/draw.svg" alt="edit">
     </div>
 
-    <div class="application-suppression" (click)="remove($event, application.id)" >
+    <div class="application-suppression" style="font-size: 30px" (click)="remove($event, application.id)" >
       X
     </div>
   </div>
-  <img [src]="imagesFolder + '/' + application.image" [alt]="application.name">
+  <img [src]="'assets/images/' + application.image" [alt]="application.name">
   <p class="text">{{application.name}}</p>
 </div>

@@ -4,7 +4,6 @@ import {ElectronService} from 'ngx-electron';
 import {ParameterService} from '../commun/service/parameters/parameter.service';
 import {StorageService} from '../commun/service/storage/storage.service';
 import {ModalService} from '../commun/service/modal/modal.service';
-import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-application',
@@ -20,7 +19,6 @@ export class ApplicationComponent {
   }
 
   @Input() application: Application;
-  imagesFolder = environment.imagesFolder;
 
   /**
    * open app on host computer

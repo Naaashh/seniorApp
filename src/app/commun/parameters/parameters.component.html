@@ -4,9 +4,20 @@
     <img src="assets/images/add.svg" alt="add">
   </button>
 
-  <button class="btn btn-blue">
+  <button class="btn btn-blue" (click)="isZoom = !isZoom">
     <img src="assets/images/magnifying-glass.svg" alt="magnifying-glass">
   </button>
+
+  <div id="slider-div" *ngIf="isZoom">
+    <span>0</span>
+    <input type="range" min="-15" max="15" [value]="(storageService.currentState$ | async).zoom" class="slider" (change)="zoom($event)">
+    <span>1</span>
+    <datalist id="tickmarks">
+      <option value="0"></option>
+      <option value="50"></option>
+      <option value="100"></option>
+    </datalist>
+  </div>
 
   <button class="btn btn-orange" (click)="storageService.reset()">
     <img src="assets/images/refreshing.svg" alt="reset">
