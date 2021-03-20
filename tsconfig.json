@@ -17,6 +17,10 @@
       "dom"
     ]
   },
+  "typedocOptions" : {
+    "entryPoints": ["src/app/"],
+    "out": "docs"
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
   }
