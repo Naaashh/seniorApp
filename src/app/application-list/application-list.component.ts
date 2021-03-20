@@ -11,12 +11,18 @@ import {State} from '../commun/model/state.model';
 })
 export class ApplicationListComponent implements OnInit {
 
+  /**
+   * Actual app {@link State} as Observable
+   */
   state: Observable<State>;
 
   constructor(private storageService: StorageService,
               public modal: ModalService) {
   }
 
+  /**
+   * get actual app state from {@link StorageService}
+   */
   ngOnInit(): void {
   this.state = this.storageService.currentState$;
    // this.state = of(applications);

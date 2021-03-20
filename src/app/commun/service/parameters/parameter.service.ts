@@ -11,7 +11,7 @@ export class ParameterService {
   public parameters = this.parameterState.asObservable();
 
   /**
-   * set param mode
+   * show or hide {@link ParametersComponent}
    */
   changeParamMode(): void {
     this.parameterShow = !this.parameterShow;

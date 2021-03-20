@@ -12,11 +12,29 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./add-edit-modal.component.scss']
 })
 export class AddEditModalComponent implements OnInit {
-
+  /**
+   * {@link FormGroup} for modal to add or edit request {@link Application}
+   */
   form: FormGroup;
+
+  /**
+   * Image previewed showing current image / on image upload
+   */
   imagePreviewed: { image: string, name: string };
+
+  /**
+   * {@link FileReader} used to read image on image upload
+   */
   reader: FileReader;
+
+  /**
+   * ImagesFolder where all images are present
+   */
   imagesFolder = environment.imagesFolder;
+
+  /**
+   * {@link Application} requested to be modified or added
+   */
   application: Application;
 
   constructor(private fb: FormBuilder,
@@ -42,7 +60,7 @@ export class AddEditModalComponent implements OnInit {
   }
 
   /**
-   * check if click outside modal (click on bg-modal)
+   * check if click outside modal component (click on bg-modal)
    * @param event click event
    */
   @HostListener('document:click', ['$event'])
@@ -53,7 +71,9 @@ export class AddEditModalComponent implements OnInit {
   }
 
   /**
-   * submit modal
+   * Add new / Modify {@link Application} to {@link StorageService} if {@link AddEditModalComponent.form} is
+   * considered as valid then close modal
+   *
    */
   submit(): void {
 
@@ -87,7 +107,7 @@ export class AddEditModalComponent implements OnInit {
   }
 
   /**
-   * close modal
+   * close current {@link AddEditModalComponent} modal
    */
   closeModal(): void {
     // small hack to clock modal using button without close parameters on same time
@@ -95,18 +115,18 @@ export class AddEditModalComponent implements OnInit {
   }
 
   /**
-   * activate input file when click on input text
+   * Activate 'image-input-upload' in html input type=file
    */
-  uploadFile(): void {
+  openChooseFileDialog(): void {
     // small hack to activate hidden input file
     document.getElementById('image-input-upload').click();
   }
 
   /**
-   * update modal when new file has been uploaded
-   * @param event uploaded file
+   * Read chosen file and updated {@link AddEditModalComponent.imagePreviewed}
+   * @param event chosen file
    */
-  fileUploaded(event: Event): void {
+  showChosenFile(event: Event): void {
     const file = (event.target as any).files[0];
     this.reader.readAsDataURL(file); // Converting file into data URL
 
@@ -119,8 +139,8 @@ export class AddEditModalComponent implements OnInit {
   }
 
   /**
-   * set image preview
-   * @param application application pushed to modal
+   * set image preview based on {@link AddEditModalComponent.application}
+   * @param application Application pushed to modal
    */
   getImagePreview(application: Application): void {
     this.imagePreviewed = application?.image && application?.name

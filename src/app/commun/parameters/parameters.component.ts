@@ -10,21 +10,34 @@ import {State} from '../model/state.model';
 })
 export class ParametersComponent implements OnInit, AfterViewChecked {
 
-
-  @Input() paramClick: boolean;
-
+  /**
+   * true if {@link ParametersComponent} should be shown
+   */
+  @Input() paramShow: boolean;
+  /**
+   * true if zoom range should be shown
+   */
   isZoom = false;
-  private zoomed: number;
+  /**
+   * cyrrent zoom value
+   */
+  zoomed: number;
 
   constructor(public storageService: StorageService,
               public modal: ModalService,
               private eRef: ElementRef) {
   }
 
+  /**
+   * apply zoom on {@link ParametersComponent} start
+   */
   ngAfterViewChecked(): void {
     this.applyZoom();
   }
 
+  /**
+   * get current app {@link State} and update {@link ParametersComponent.zoomed}
+   */
   ngOnInit(): void {
     this.storageService.currentState$.subscribe((state: State) => this.zoomed = state.zoom);
   }
@@ -38,6 +51,9 @@ export class ParametersComponent implements OnInit, AfterViewChecked {
     this.applyZoom();
   }
 
+  /**
+   * apply {@link ParametersComponent.zoomed} to general font-size
+   */
   applyZoom(): void {
     const fontSize = 30 + this.zoomed;
     document.getElementById('container').style.fontSize = fontSize + 'px';
@@ -50,7 +66,7 @@ export class ParametersComponent implements OnInit, AfterViewChecked {
    */
   @HostListener('document:click', ['$event'])
   focusOutZoom(event): void {
-    if (!this.eRef.nativeElement.contains(event.target) && !this.paramClick) {
+    if (!this.eRef.nativeElement.contains(event.target) && !this.paramShow) {
       if (this.zoomed !== this.storageService.state.zoom) {
         this.storageService.editZoom(this.zoomed);
       }

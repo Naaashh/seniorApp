@@ -13,12 +13,20 @@ export class ModalService {
 
   public value$: Observable<Application>;
 
+  /**
+   * open {@link AddEditModalComponent}
+   * @see {@link Application} for data param
+   * @param application Application with default values if null
+   */
   openModal(application: Application = {id: null, execute: null, image: null, isProgram: false, name: null}): void {
     this.value$ = of(application);
     this.show = true;
     this.showBehavior.next(this.show);
   }
 
+  /**
+   * open {@link AddEditModalComponent}
+   */
   closeModal(): void {
     this.show = false;
     this.showBehavior.next(this.show);

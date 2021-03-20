@@ -48,13 +48,13 @@
 
             <input hidden type="file"
                    id="image-input-upload"
-                   accept="image/png, image/jpeg" (change)="fileUploaded($event)">
+                   accept="image/png, image/jpeg" (change)="showChosenFile($event)">
 
             <input type="text"
                    id="image-input"
                    formControlName="image"
                    aria-describedby="image_application"
-                   placeholder="image" (click)="uploadFile()" readonly>
+                   placeholder="image" (click)="openChooseFileDialog()" readonly>
           </div>
 
       </form>

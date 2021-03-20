@@ -16,7 +16,7 @@ export class StorageService {
   constructor(private electronService: ElectronService) { }
 
   /**
-   * get stored data
+   * get actual app stored in data file has {@link State}
    */
   async getData(): Promise<State> {
     this.electronService.ipcRenderer.send('get-data');
@@ -28,8 +28,8 @@ export class StorageService {
   }
 
   /**
-   * Add an application to stored data
-   * @param application application to add
+   * Add {@link Application} stored in data file has {@link State}
+   * @param application Application to add
    */
   add(application: Application): void {
     this.state.applications = [...this.state.applications, application];
@@ -45,8 +45,8 @@ export class StorageService {
   }
 
   /**
-   * edit an application to stored data
-   * @param application application to edit
+   * edit {@link Application} stored in data file has {@link State}
+   * @param application Application to edit
    */
   edit(application: Application): void {
     this.state.applications[this.state.applications.findIndex(app => app.id === application.id)] = application;
@@ -54,8 +54,8 @@ export class StorageService {
   }
 
   /**
-   * edit an application to stored data
-   * @param zoom zoom to update
+   * edit zoom value stored in data file has {@link State}
+   * @param zoom zoom value to update
    */
   editZoom(zoom: number): void {
     this.state.zoom = zoom;
@@ -63,7 +63,7 @@ export class StorageService {
   }
 
   /**
-   * remove an application in stored data if exists
+   * remove requested {@link Application} stored in data file has {@link State}
    * @param id application id to remove
    */
   remove(id: string): void {
@@ -76,7 +76,7 @@ export class StorageService {
   }
 
   /**
-   * reset storage to default preset
+   * reset current app {@link State} in data file from a default file
    */
   async reset(): Promise<State> {
     this.electronService.ipcRenderer.send('reset-data');
@@ -88,7 +88,7 @@ export class StorageService {
   }
 
   /**
-   * send currentApplications to modification and update currentApplicationsState
+   * send currentApplications to modification and update current app {@link State}
    */
   modifyAndUpdateState(): void {
     this.electronService.ipcRenderer.send('modify-data', this.state);

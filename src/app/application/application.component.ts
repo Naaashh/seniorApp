@@ -18,10 +18,13 @@ export class ApplicationComponent {
               public storageService: StorageService) {
   }
 
+  /**
+   * {@link Application} retrived from parent component
+   */
   @Input() application: Application;
 
   /**
-   * open app on host computer
+   * open {@link Application} executable as a program or as an http link
    */
   openApp(): void {
     if (this.application.isProgram) {
@@ -34,7 +37,7 @@ export class ApplicationComponent {
   }
 
   /**
-   * Remove application from list
+   * Remove {@link Application} from actual {@link Application} list
    * @param event current application
    * @param id application id
    */
@@ -45,9 +48,9 @@ export class ApplicationComponent {
   }
 
   /**
-   * edit requested application
-   * @param event current application
-   * @param application chosen application
+   * edit requested {@link Application}
+   * @param event current {@link Application}
+   * @param application chosen {@link Application}
    */
   edit(event: Event, application: Application): void {
     // stop propagation to not open app
