@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {StorageService} from './commun/service/storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,13 @@ export class AppComponent implements OnInit {
    */
   title = 'seniorApp';
 
+  constructor(private storageService: StorageService) {
+  }
   /**
    * hide startup animations
    */
   ngOnInit(): void {
+    this.storageService.getData();
     this.noAnimation();
   }
 
