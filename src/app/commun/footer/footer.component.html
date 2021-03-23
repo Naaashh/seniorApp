@@ -1,2 +1,3 @@
 <app-parameters [paramShow]="parameterService.parameters | async"></app-parameters>
+<img id="parameters-question" src="assets/images/question.svg" alt="images-informations" (click)="imagesCreditModal.openModal()">
 <img id="parameters-icon" [class.parametersClick]="parameterService.parameters | async" src="assets/images/gear.svg" alt="parameter" (click)="parameterService.changeParamMode()">

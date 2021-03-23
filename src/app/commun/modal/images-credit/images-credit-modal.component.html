@@ -1,0 +1,15 @@
+<div class="bg-modal">
+  <div class="modal images-credit">
+
+    <div class="title">
+      Les images !
+      <div class="remove" (click)="closeModal()">X</div>
+    </div>
+    <div class="content">
+      <div class="element" *ngFor="let credit of imagesCredits">
+        <img src="{{imagesFolder + '/' + credit.name +'.svg'}}" alt="{{credit.name}}">
+        <span class="element-name"><em>{{credit.name}}</em></span> crée par <a href="{{credit.link}}" title="{{credit.title}}">{{credit.title}}</a> depuis <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+      </div>
+    </div>
+  </div>
+</div>

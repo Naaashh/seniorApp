@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../commun/service/storage/storage.service';
 import {Observable} from 'rxjs';
-import {ModalService} from '../commun/service/modal/modal.service';
+import {AddEditModalService} from '../commun/modal/add-edit/service/add-edit-modal.service';
 import {State} from '../commun/model/state.model';
+import {ImagesCreditModalService} from '../commun/modal/images-credit/service/images-credit-modal.service';
 
 @Component({
   selector: 'app-application-list',
@@ -17,7 +18,8 @@ export class ApplicationListComponent implements OnInit {
   state: Observable<State>;
 
   constructor(private storageService: StorageService,
-              public modal: ModalService) {
+              public modal: AddEditModalService,
+              public imagesCreditModal: ImagesCreditModalService) {
   }
 
   /**
@@ -25,6 +27,6 @@ export class ApplicationListComponent implements OnInit {
    */
   ngOnInit(): void {
   this.state = this.storageService.currentState$;
-   // this.state = of(applications);
+  // this.state = of(applications);
   }
 }

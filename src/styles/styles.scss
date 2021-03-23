@@ -119,20 +119,25 @@ app-footer {
   width: 1000px;
   right: 50px;
 
+  #parameters-question {
+    position:fixed;
+    left: 20px;
+    bottom:20px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
   /* -- app-parameters -- */
   app-parameters {
     cursor: pointer;
     float:right;
     margin-right: 120px;
     visibility: hidden;
-
-    .parameters {
-      height: 100px;
-      justify-content: flex-end;
-      align-items: flex-end;
-      border-radius: 20px;
-      margin: 0;
-    }
 
     .parametersDisplay {
       display:flex;
@@ -142,28 +147,58 @@ app-footer {
     .parametersDisplayOut {
       animation: parameters-hide 0.5s ease-in-out forwards;
     }
+
+    .parameters {
+      height: 100px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      border-radius: 20px;
+      margin: 0;
+
+      button {
+        height: 85px;
+        &:hover {
+          transform: scale(1.1)
+        }
+        img {
+          height: 35px;
+          width: 35px;
+        }
+      }
+      .edit-btn img{
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+  /* -- slider -- */
+  #slider-div {
+
+    input.slider {
+      border-radius: 50px;
+    }
+
+    position: fixed;
+    width: 500px;
+    height: 80px;
+    bottom: 130px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    background: #101116;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      padding: 5px;
+      font-size: 25px;
+    }
   }
+}
 
   .parametersClick {
     transition: all 0.7s ease-in-out;
     transform: rotate(90deg) scale(1.8, 1.8);
-  }
-
-  .parameters {
-    button {
-      height: 85px;
-      &:hover {
-        transform: scale(1.1)
-      }
-      img {
-        height: 35px;
-        width: 35px;
-      }
-    }
-    .edit-btn img{
-      height: 40px;
-      width: 40px;
-    }
   }
 
   #parameters-icon {
@@ -178,146 +213,165 @@ app-footer {
   }
 }
 
-/* -- app-add-edit-modal -- */
-app-add-edit-modal {
+/* -- modal -- */
+// using a pseudo-element class to not affect child opacity
+.bg-modal::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: $background-color;
+  opacity: 0.85;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 50;
+}
 
-    // using a pseudo-element class to not affect child opacity
-  .bg-modal::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: $background-color;
-    opacity: 0.85;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    z-index: 50;
-  }
-
-  .modal {
-    top: 7%;
-    left: 7%;
-    height: 86%;
-    width: 86%;
-    margin: 0;
-    padding: 10px 30px;
-    position: fixed;
-    box-sizing: border-box;
-    opacity: 1;
-    z-index: 100;
-    border-radius: 10px;
-    background: $background-color;
-    box-shadow: 0 0 10px black;
-    animation: blow-up-modal .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+.modal {
+  top: 7%;
+  left: 7%;
+  height: 86%;
+  width: 86%;
+  margin: 0;
+  padding: 10px 30px;
+  position: fixed;
+  box-sizing: border-box;
+  opacity: 1;
+  z-index: 100;
+  border-radius: 10px;
+  background: $background-color;
+  box-shadow: 0 0 10px black;
+  animation: blow-up-modal .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  &.add-edit {
     display: grid;
     gap: 50px;
     grid-template-columns: 10% 20% 20% 20%;
     grid-template: "title title title" 10%
-                   "img-preview form form" 65%
-                   ". . validate" 10% / 1fr 1fr 1fr;
+    "img-preview form form" 65%
+    ". . validate" 10% / 1fr 1fr 1fr;
+  }
+
+  &.images-credit {
+    font-size: 15px;
+    letter-spacing: 2px;
 
     .title {
-      grid-area: title;
-      font-size: 30px;
+      padding: 20px 0;
+    }
 
-      .remove {
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 15px;
-        height: 35px;
-        width: 35px;
+    img {
+      float:left;
+      height: 45px;
+      width: 45px;
+      margin-right: 30px;
+    }
+
+    .content {
+      padding: 20px;
+      height: 85%;
+      overflow-y: scroll;
+      text-align: right;
+
+      &.element span {
         text-align: center;
-        cursor: pointer;
+      }
+
+      .element {
+        height: 45px;
+
+        .element-name {
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
 
         &:hover {
-          background: $red-color-light;
-          filter: brightness(95%);
-          border-radius: 0 10px 0 10px;
+          filter: brightness(110%);
         }
-      }
-    }
-
-    .img-preview {
-      grid-area: img-preview;
-      align-self: center;
-      justify-self: center;
-      box-shadow: 0 0 2px 2px #000518;
-      border-radius: 5px;
-
-      img {
-        height: 25vw;
-        width: 25vw;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-    }
-
-    form {
-      height: 100%;
-    }
-
-    .form {
-      grid-area: form;
-      margin: auto 0;
-
-      .div-form {
-        .error {
-          font-size: 15px;
-          text-align: center;
-          color: $red-color-light;
-        }
-
-        label {
-          margin-bottom: 10px;
-        }
-
-        input {
-          color: whitesmoke;
-          letter-spacing: 5px;
-        }
-
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        flex-wrap: nowrap;
-        margin-bottom: 100px;
-        height: 50px;
-      }
-    }
-
-    .validate {
-      grid-area: validate;
-      button {
-        float: right;
-        margin: 0;
       }
     }
   }
-}
 
-/* -- slider -- */
-#slider-div {
+  .title {
+    grid-area: title;
+    font-size: 30px;
 
-  input.slider {
-    border-radius: 50px;
+    .remove {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 15px;
+      height: 35px;
+      width: 35px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background: $red-color-light;
+        filter: brightness(95%);
+        border-radius: 0 10px 0 10px;
+      }
+    }
   }
 
-  position: fixed;
-  width: 500px;
-  height: 80px;
-  bottom: 130px;
-  padding: 5px 20px;
-  border-radius: 20px;
-  background: #101116;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .img-preview {
+    grid-area: img-preview;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 0 0 2px 2px #000518;
+    border-radius: 5px;
 
-  span {
-    padding: 5px;
-    font-size: 25px;
+    img {
+      height: 25vw;
+      width: 25vw;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+
+  form {
+    height: 100%;
+  }
+
+  .form {
+    grid-area: form;
+    margin: auto 0;
+
+    .div-form {
+      .error {
+        font-size: 15px;
+        text-align: center;
+        color: $red-color-light;
+      }
+
+      label {
+        margin-bottom: 10px;
+      }
+
+      input {
+        color: whitesmoke;
+        letter-spacing: 5px;
+      }
+
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: nowrap;
+      margin-bottom: 100px;
+      height: 50px;
+    }
+  }
+
+  .validate {
+    grid-area: validate;
+    button {
+      float: right;
+      margin: 0;
+    }
   }
 }
 

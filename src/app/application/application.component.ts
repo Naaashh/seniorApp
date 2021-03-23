@@ -3,7 +3,7 @@ import {Application} from './application.model';
 import {ElectronService} from 'ngx-electron';
 import {ParameterService} from '../commun/service/parameters/parameter.service';
 import {StorageService} from '../commun/service/storage/storage.service';
-import {ModalService} from '../commun/service/modal/modal.service';
+import {AddEditModalService} from '../commun/modal/add-edit/service/add-edit-modal.service';
 
 @Component({
   selector: 'app-application',
@@ -14,7 +14,7 @@ export class ApplicationComponent {
 
   constructor(public parameterService: ParameterService,
               private electron: ElectronService,
-              private modal: ModalService,
+              private modal: AddEditModalService,
               public storageService: StorageService) {
   }
 

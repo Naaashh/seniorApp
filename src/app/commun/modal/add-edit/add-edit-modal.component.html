@@ -1,5 +1,5 @@
 <div class="bg-modal">
-  <div class="modal">
+  <div class="modal add-edit">
 
     <div class="title">
       {{application.id ? 'Modifier le raccourci': 'Ajouter un raccourci'}}
@@ -25,7 +25,8 @@
                    formControlName="name"
                    aria-describedby="nom_application"
                    placeholder="nom"
-                   autofocus>
+                   autofocus
+            >
           </div>
 
           <div class="div-form">
@@ -40,7 +41,8 @@
                    id="lien-input"
                    formControlName="execute"
                    aria-describedby="lien_application"
-                   placeholder="Lien du raccourci">
+                   placeholder="Lien du raccourci"
+            >
           </div>
 
           <div class="div-form">
@@ -48,13 +50,15 @@
 
             <input hidden type="file"
                    id="image-input-upload"
-                   accept="image/png, image/jpeg" (change)="showChosenFile($event)">
+                   accept="image/png, image/jpeg" (change)="showChosenFile($event)"
+            >
 
             <input type="text"
                    id="image-input"
                    formControlName="image"
                    aria-describedby="image_application"
-                   placeholder="image" (click)="openChooseFileDialog()" readonly>
+                   placeholder="image" (click)="openChooseFileDialog()" readonly
+            >
           </div>
 
       </form>

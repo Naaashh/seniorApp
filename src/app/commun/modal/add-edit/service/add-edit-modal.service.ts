@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Application} from '../../../application/application.model';
+import {Application} from '../../../../application/application.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModalService {
+export class AddEditModalService {
 
   public show = false;
   private showBehavior = new BehaviorSubject<boolean>(this.show);

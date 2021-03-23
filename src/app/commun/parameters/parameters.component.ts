@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import {StorageService} from '../service/storage/storage.service';
-import {ModalService} from '../service/modal/modal.service';
+import {AddEditModalService} from '../modal/add-edit/service/add-edit-modal.service';
 import {State} from '../model/state.model';
 
 @Component({
@@ -19,12 +19,12 @@ export class ParametersComponent implements OnInit, AfterViewChecked {
    */
   isZoom = false;
   /**
-   * cyrrent zoom value
+   * current zoom value
    */
   zoomed: number;
 
   constructor(public storageService: StorageService,
-              public modal: ModalService,
+              public modal: AddEditModalService,
               private eRef: ElementRef) {
   }
 

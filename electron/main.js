@@ -11,7 +11,7 @@ let tray;
 
 let actualData;
 let currentDir = __dirname + '\\';
-let assetsDir = __dirname + '\\dist/assets\\';
+let assetsDir = __dirname + '\\dist\\assets\\';
 
 const useSplashScreen = !app.commandLine.hasSwitch('disable-splashScreen');
 
@@ -147,6 +147,14 @@ ipcMain.on('execute-command', (event, args) => {
 ipcMain.on('get-data', event => {
   actualData = JSON.parse(fs.readFileSync(`${assetsDir}data\\actual_data.json`, 'utf-8'));
   event.reply('get-data', actualData);
+});
+
+/**
+ * read images credit from images_credit.json file
+ */
+ipcMain.on('get-images-credit', event => {
+  actualData = JSON.parse(fs.readFileSync(`${assetsDir}data\\images_credit.json`, 'utf-8'));
+  event.reply('get-images-credit', actualData);
 });
 
 /**

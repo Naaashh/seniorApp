@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
 import {ParameterService} from '../service/parameters/parameter.service';
-import {ModalService} from '../service/modal/modal.service';
+import {AddEditModalService} from '../modal/add-edit/service/add-edit-modal.service';
+import {ImagesCreditModalService} from '../modal/images-credit/service/images-credit-modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +11,8 @@ import {ModalService} from '../service/modal/modal.service';
 export class FooterComponent {
 
   constructor(private eRef: ElementRef,
-              private modal: ModalService,
+              private modal: AddEditModalService,
+              public imagesCreditModal: ImagesCreditModalService,
               public parameterService: ParameterService) {
   }
 

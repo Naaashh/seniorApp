@@ -1,6 +1,6 @@
-$background-color: #1a1c24;
-$background-color-rgb: 26,28,36;
-$application-color: #31343d;
+$background-color: #151825;
+$background-color-rgb: 21,24,37;
+$application-color: #282e40;
 
 $complete-white-color: #FFFFFF;
 $complete-black-color: #070707;
@@ -17,6 +17,6 @@ $grey-color: #a3a3a3;
 $application-size: 250px;
 $parameter-img-size: 50px;
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   $application-size: 20px;
 }

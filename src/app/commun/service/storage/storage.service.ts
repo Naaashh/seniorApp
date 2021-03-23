@@ -3,6 +3,7 @@ import {ElectronService} from 'ngx-electron';
 import {Application} from '../../../application/application.model';
 import {BehaviorSubject} from 'rxjs';
 import {State} from '../../model/state.model';
+import {ImageCredit} from '../../model/imageCredit';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,16 @@ export class StorageService {
       this.state = message;
       this.currentState.next(this.state);
       resolve(this.state);
+    }));
+  }
+
+  /**
+   * get images credits stored in data file has {@link ImagesCredit}
+   */
+  async getImagesCredit(): Promise<Array<ImageCredit>> {
+    this.electronService.ipcRenderer.send('get-images-credit');
+    return await new Promise(resolve => this.electronService.ipcRenderer.on('get-images-credit', (event, message: Array<ImageCredit>) => {
+      resolve(message);
     }));
   }
 

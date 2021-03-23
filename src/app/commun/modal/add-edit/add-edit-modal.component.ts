@@ -1,10 +1,10 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {Application} from '../../application/application.model';
+import {Application} from '../../../application/application.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ModalService} from '../service/modal/modal.service';
-import {StorageService} from '../service/storage/storage.service';
+import {AddEditModalService} from '../../modal/add-edit/service/add-edit-modal.service';
+import {StorageService} from '../../service/storage/storage.service';
 import {v4 as uuid} from 'uuid';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-add-edit-modal',
@@ -38,7 +38,7 @@ export class AddEditModalComponent implements OnInit {
   application: Application;
 
   constructor(private fb: FormBuilder,
-              public modal: ModalService,
+              public modal: AddEditModalService,
               private storageService: StorageService) { }
 
   ngOnInit(): void {

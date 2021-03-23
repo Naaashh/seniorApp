@@ -1,4 +1,5 @@
 <app-add-edit-modal *ngIf="modal.show$ | async"></app-add-edit-modal>
+<app-images-credit-modal *ngIf="imagesCreditModal.show$ | async"></app-images-credit-modal>
 <div id="application-list">
   <div class="application" *ngFor="let application of (state | async).applications">
     <app-application [application]="application"></app-application>

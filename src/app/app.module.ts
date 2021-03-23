@@ -7,8 +7,9 @@ import {ApplicationComponent} from './application/application.component';
 import {ParametersComponent} from './commun/parameters/parameters.component';
 import {NgxElectronModule} from 'ngx-electron';
 import {FooterComponent} from './commun/footer/footer.component';
-import {AddEditModalComponent} from './commun/modal/add-edit-modal.component';
+import {AddEditModalComponent} from './commun/modal/add-edit/add-edit-modal.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ImagesCreditModalComponent} from './commun/modal/images-credit/images-credit-modal.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {ReactiveFormsModule} from '@angular/forms';
         ApplicationComponent,
         ParametersComponent,
         FooterComponent,
-        AddEditModalComponent
+        AddEditModalComponent,
+        ImagesCreditModalComponent
     ],
   imports: [
     BrowserModule,
