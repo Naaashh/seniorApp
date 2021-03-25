@@ -83,7 +83,7 @@ export class AddEditModalComponent implements OnInit {
       submitApplication = {
         ...submitApplication,
         name: this.form.value.name.trim(),
-        image: this.form.value.image || environment.defaultImage,
+        image: this.form.value.image || environment.defaultImage.match('\\w+.\\w+')[0],
         execute: (
           !this.form.value.execute.match('^https?:\/\/.+$') ?
             'https://' + this.form.value.execute : this.form.value.execute).trim()
