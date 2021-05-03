@@ -1,6 +1,11 @@
 @import './variables.scss';
 @import './global.scss';
 
+@font-face {
+  font-family: 'Roboto';
+  src:  url('../assets/static/Roboto-Medium.ttf');
+}
+
 html {
   height: 100%;
   font-size: 1.9em;
@@ -10,7 +15,7 @@ html {
 }
 
 * {
-  font-family: "Roboto Thin", sans-serif;
+  font-family: 'Roboto', 'sans-serif';
   outline: none;
 }
 
@@ -44,9 +49,9 @@ body, .container-after-titlebar {
 .application {
   width: $application-size;
   height: $application-size;
-  background-color: $application-color;
+  background: linear-gradient(350deg, #282e40 0%, rgba(35,36,40,1) 40%, rgba(34,35,42,1) 60%, rgba(35,38,46,1) 85%, rgba(36,38,50,1) 100%);
   border-radius: 20px;
-  box-shadow: 4px 4px 0 2px #000518;
+  box-shadow: 10px 10px 10px 2px rgb(15,15,15);
   text-align: center;
   cursor: pointer;
   user-select: none;
@@ -98,6 +103,8 @@ body, .container-after-titlebar {
       margin: 20px auto;
     }
     .text {
+      color: rgb(200, 200, 200);
+      letter-spacing: 2px;
       margin-bottom: 20px;
       margin-top: 0;
     }
