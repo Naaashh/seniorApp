@@ -7,9 +7,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href ./",
+    "build&dev:electron": "ng build --base-href ./ && electron . --dev",
     "start:electron": "electron . --disable-splash --dev",
-    "build&start:electron": "ng build --prod --base-href ./ && electron . --dev",
+    "build&start:electron": "ng build --prod --base-href ./",
     "doc": "typedoc",
     "test": "ng test"
   },
