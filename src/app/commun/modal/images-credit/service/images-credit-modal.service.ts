@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ImageCredit} from 'src/app/commun/model/imageCredit';
+import {ImageCredit} from '../../../model/imageCredit.model';
 
 @Injectable({
   providedIn: 'root'

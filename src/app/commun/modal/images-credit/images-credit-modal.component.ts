@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {ImageCredit} from '../../model/imageCredit';
+import {ImageCredit} from '../../model/imageCredit.model';
 import {StorageService} from '../../service/storage/storage.service';
 import {ImagesCreditModalService} from './service/images-credit-modal.service';
 import {environment} from '../../../../environments/environment';

@@ -4,6 +4,7 @@ import {ElectronService} from 'ngx-electron';
 import {ParameterService} from '../commun/service/parameters/parameter.service';
 import {StorageService} from '../commun/service/storage/storage.service';
 import {AddEditModalService} from '../commun/modal/add-edit/service/add-edit-modal.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-application',
@@ -18,6 +19,7 @@ export class ApplicationComponent {
               public storageService: StorageService) {
   }
 
+  imagesFolder = environment.imagesFolder;
   /**
    * {@link Application} retrived from parent component
    */

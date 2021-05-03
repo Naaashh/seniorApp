@@ -3,7 +3,7 @@ import {ElectronService} from 'ngx-electron';
 import {Application} from '../../../application/application.model';
 import {BehaviorSubject} from 'rxjs';
 import {State} from '../../model/state.model';
-import {ImageCredit} from '../../model/imageCredit';
+import {ImageCredit} from '../../model/imageCredit.model';
 
 @Injectable({
   providedIn: 'root'

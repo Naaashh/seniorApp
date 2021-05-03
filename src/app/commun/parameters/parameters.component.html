@@ -10,12 +10,12 @@
 
   <div id="slider-div" *ngIf="isZoom">
     <span>0</span>
-    <input type="range" min="-15" max="15" [value]="(storageService.currentState$ | async).zoom" class="slider" (change)="zoom($event)">
+    <input type="range" list="tickmarks" min="-15" max="15" [value]="(storageService.currentState$ | async).zoom" class="slider" (change)="zoom($event)">
     <span>1</span>
     <datalist id="tickmarks">
+      <option value="-15"></option>
       <option value="0"></option>
-      <option value="50"></option>
-      <option value="100"></option>
+      <option value="15"></option>
     </datalist>
   </div>
 
