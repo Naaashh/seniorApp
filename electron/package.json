@@ -7,7 +7,7 @@
   "scripts": {
     "start:electron": "electron . --disable-splash",
     "build&start:electron": "ng build --prod --base-href ./ && electron .",
-    "electron:package": "electron-packager . --platform=win32 --overwrite --asar --prune=true --icon=dist/assets/icon/favicon.ico --extra-resource=dist/assets/data"
+    "electron:package": "electron-packager . --platform=win32 --overwrite --asar --prune=true --icon=dist/assets/icon/favicon.ico --extra-resource=dist/assets/data --extra-resource=dist/assets/images"
   },
   "private": true,
   "devDependencies": {

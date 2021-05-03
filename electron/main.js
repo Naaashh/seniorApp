@@ -1,6 +1,7 @@
 const electron = require('electron');
 const {app, BrowserWindow, Menu, Tray, ipcMain} = electron;
 const fs = require('fs');
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -10,15 +11,13 @@ let splash;
 let tray;
 
 let actualData;
-let currentDir = __dirname + '\\';
-let assetsDir = __dirname + '\\dist\\assets\\';
+const iconPath = path.join(__dirname, '\\dist\\assets\\icon\\favicon.ico');
+const resourcesDir = !app.commandLine.hasSwitch('dev') ? '../' : 'dist/assets/'
 
 const useSplashScreen = !app.commandLine.hasSwitch('disable-splashScreen');
 
 // if command doesn't ask for prod mod, switched to devMode
 const isDevMode = app.commandLine.hasSwitch('dev');
-
-const iconPath = `${assetsDir}icon\\favicon.ico`;
 
 /**
  * init electron app
@@ -52,13 +51,13 @@ function createWindow() {
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      preload: `${currentDir}preload.js`,
+      preload: `${__dirname}/preload.js`,
       enableRemoteModule: true
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(`${currentDir}dist\\index.html`);
+  mainWindow.loadFile(path.join(__dirname,'\\dist\\index.html'));
 
   if (isDevMode) {
     // Open the DevTools.
@@ -93,8 +92,8 @@ app.on('window-all-closed', () => {
  */
 function createSplash() {
   // create splash screen
-  splash = new BrowserWindow({width: 600, height: 800, transparent: true, frame: false, alwaysOnTop: true});
-  splash.loadFile(`${assetsDir}static\\splash.html`);
+  splash = new BrowserWindow({width: 300, height: 400, transparent: true, frame: false, alwaysOnTop: true});
+  splash.loadFile(path.join(__dirname, '\\dist\\assets\\static\\splash.html'));
 }
 
 function createTray() {
@@ -125,7 +124,7 @@ app.once('ready', () => {
 });
 
 /**
- * executre command
+ * execute command
  * @param command
  * @param callback
  */
@@ -145,7 +144,7 @@ ipcMain.on('execute-command', (event, args) => {
  * read data from actual_data.json file
  */
 ipcMain.on('get-data', event => {
-  actualData = JSON.parse(fs.readFileSync(`${assetsDir}data\\actual_data.json`, 'utf-8'));
+  actualData = JSON.parse(fs.readFileSync(path.join(__dirname, resourcesDir, 'data/actual_data.json'), 'utf-8'));
   event.reply('get-data', actualData);
 });
 
@@ -153,7 +152,7 @@ ipcMain.on('get-data', event => {
  * read images credit from images_credit.json file
  */
 ipcMain.on('get-images-credit', event => {
-  actualData = JSON.parse(fs.readFileSync(`${assetsDir}data\\images_credit.json`, 'utf-8'));
+  actualData = JSON.parse(fs.readFileSync(path.join(__dirname, resourcesDir, 'data/images_credit.json'), 'utf-8'));
   event.reply('get-images-credit', actualData);
 });
 
@@ -162,15 +161,15 @@ ipcMain.on('get-images-credit', event => {
  */
 ipcMain.on('modify-data', (event, data) => {
   actualData = {...actualData, ...data};
-  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_data.json`, JSON.stringify(actualData));
+  fs.writeFileSync(path.join(__dirname, resourcesDir, 'data/actual_data.json'), JSON.stringify(actualData));
 });
 
 /**
  * reset data from default_data.json file
  */
 ipcMain.on('reset-data', event => {
-  actualData = JSON.parse(fs.readFileSync(`${__dirname}\\dist\\assets\\data\\default_data.json`, 'utf-8'));
-  fs.writeFileSync(`${__dirname}\\dist\\assets\\data\\actual_data.json`, JSON.stringify(actualData));
+  actualData = JSON.parse(fs.readFileSync(path.join(__dirname, resourcesDir, 'data/default_data.json'), 'utf-8'));
+  fs.writeFileSync(path.join(__dirname, resourcesDir, 'data/actual_data.json'), JSON.stringify(actualData));
 
   event.reply('reset-data', actualData);
 });
@@ -180,5 +179,5 @@ ipcMain.on('reset-data', event => {
  */
 ipcMain.on('add-image', (event, data) => {
   const buffered = Buffer.from(data.image.split(';base64,').pop(), 'base64');
-  fs.writeFileSync(`${__dirname}\\dist\\assets\\images\\${data.name}`, buffered);
+  fs.writeFileSync(path.join(__dirname, resourcesDir, 'images/' + data.name), buffered);
 });
