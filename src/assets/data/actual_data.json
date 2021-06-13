@@ -55,6 +55,13 @@
       "image": "carts.svg",
       "execute": "https://www.amazon.com",
       "isProgram": false
+    },
+    {
+      "id": "8",
+      "name": "covoiturage",
+      "image": "carts.svg",
+      "execute": "https://www.blablacar.fr",
+      "isProgram": false
     }
   ],
   "zoom": 0
